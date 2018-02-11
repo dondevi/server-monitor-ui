@@ -12,7 +12,7 @@
 
 ## Demo
 
-<https://dondevi.github.io/server-monitor-ui/dist/?mock>
+<https://dondevi.github.io/server-monitor-ui/dist/index.html?mock>
 
 
 ## Initialization
