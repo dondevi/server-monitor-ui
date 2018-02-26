@@ -83,3 +83,13 @@
     },
   };
 </script>
+
+<style scoped>
+  .q-card {
+    text-align: center;
+  }
+  .q-card-main {
+    font-size: 16px;
+    text-indent: -5px;
+  }
+</style>
