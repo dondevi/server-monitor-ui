@@ -8,6 +8,8 @@
  *
  * @author dondevi
  * @create 2018-02-02
+ *
+ * @update 2018-03-13 dondevi
  */
 
 const path = require("path");
@@ -32,17 +34,19 @@ cooking.set({
   extends: ["vue2", "autoprefixer"],
   minimize: true,
   sourceMap: false,
+  // extractCSS: true,
 
   alias: {
+    "quasar-framework-js": "quasar-framework/dist/quasar.mat.esm.js",
+    "quasar-framework-css": "quasar-framework/dist/umd/quasar.mat.css",
     "src": path.resolve(__dirname, "src"),
     "mock": path.resolve(__dirname, "mock"),
     "router": path.resolve(__dirname, "src/router"),
     "service": path.resolve(__dirname, "src/service"),
-    "views": path.resolve(__dirname, "src/views"),
     "pages": path.resolve(__dirname, "src/pages"),
-    "themes": path.resolve(__dirname, "src/themes"),
-    "configs": path.resolve(__dirname, "src/configs"),
-    "layouts": path.resolve(__dirname, "src/layouts"),
+    "frames": path.resolve(__dirname, "src/frames"),
+    "assets": path.resolve(__dirname, "src/assets"),
+    "filters": path.resolve(__dirname, "src/filters"),
     "modules": path.resolve(__dirname, "src/modules"),
     "components": path.resolve(__dirname, "src/components"),
   },
@@ -71,7 +75,7 @@ cooking.add("loader.mp3", {
   test: /\.mp3$/,
   loader: 'url-loader',
   options: {
-    limit: 10000,
+    limit: 5000,
     name: path.posix.join(assetsPath, "[name].[hash:7].[ext]"),
   }
 });
