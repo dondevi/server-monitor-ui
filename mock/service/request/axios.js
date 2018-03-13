@@ -10,35 +10,25 @@
  *   1.Move: getMockData() to "/mock/service/util.js"
  */
 
-import { getMockData } from "mock/service/util.js";
+import { getResponse } from "mock/service/respond/axios.js";
 
 /**
  * Axios 假数据适配器
- * @param  {Object} MOCKS  - 假数据集合
  * @param  {Object} config - Axios 配置
  * @return {Promise}
  */
-export default function axiosAdapter (MOCKS, config) {
+export default function axiosAdapter (config) {
   return new Promise((resolve, reject) => {
     const url      = config.url.replace(config.baseURL, "");
-    const hasMock  = url in MOCKS;
     const request  = transformRequest(config.data, config.headers);
-    try {
-      var status   = hasMock ? 202 : 404;
-      var mockData = getMockData(MOCKS, url, request.param);
-    } catch (exception) {
-      status   = 500;
-      mockData = { error: true, exception };
-      console.error(exception);
-    }
-    const response = transformResponse(mockData, request.requestNo);
-    const axiosResponse = { data: response, config, status };
+    const response = getResponse(url, request);
+    const axiosResponse = { ...response, config };
     settle(resolve, reject, axiosResponse);
   });
 }
 
 /**
- * 转换提交参数
+ * Transform request param
  * @param  {*} request - 提交参数
  */
 function transformRequest (request, headers) {
@@ -51,22 +41,11 @@ function transformRequest (request, headers) {
 }
 
 /**
- * 转换响应数据
- * @param  {Object} response - 响应数据
- */
-function transformResponse (response, requestNo) {
-  if (response && response.error) {
-    return response;
-  }
-  return { data: response, error: false, requestNo };
-}
-
-/**
- * 根据状态码处理 Promise
+ * Process Promise via HTTP status
  * @see https://github.com/mzabriskie/axios/blob/master/lib/core/settle.js
- * @param {Function} resolve  - 完成
- * @param {Function} reject   - 拒绝
- * @param {object}   response - Axios 响应数据
+ * @param {Function} resolve  - Promise resolve
+ * @param {Function} reject   - Promise reject
+ * @param {object}   response - Axios response
  */
 function settle (resolve, reject, response) {
   const { url, validateStatus } = response.config;

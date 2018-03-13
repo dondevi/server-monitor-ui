@@ -5,6 +5,9 @@
  *
  * @author dondevi
  * @create 2018-02-02
+ *
+ * @update 2018-03-06 dondevi
+ *   1.Rename: "layous/" to "frames/"
  */
 
 import Vue from "vue";
@@ -13,23 +16,14 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
 
-const main = () => import("views/main");
+const main = () => import("frames/main");
 const dashboard = () => import("pages/dashboard");
-
-// const resource = () => import("pages/resource");
-// const alert = () => import("pages/alert");
-// const business = () => import("pages/business");
 
 
 const routes = [
-  { path: "/", component: main, children: [
-    { path: "/", component: dashboard },
+  { path: "/", component: main, meta: { title: "Server Monitor" }, children: [
+    { path: "/", component: dashboard, meta: { title: "Dashboard" } },
   ] },
-  // { path: "/", redirect: "/resource", component: main, meta: { needAuth: true }, children: [
-  //   { path: "resource", component: resource },
-  //   { path: "alert", component: alert },
-  //   { path: "business", component: business },
-  // ] },
 ];
 
 

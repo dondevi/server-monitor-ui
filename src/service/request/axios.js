@@ -29,16 +29,15 @@ axiosDefaults.transformRequest = [transformRequest].concat(axios.defaults.transf
 
 
 /**
- * 通用 Post 函数
- * @param  {String} url    - 提交地址（相对路径）
- * @param  {*}      param  - 提交参数
+ * 通用请求函数
+ * @param  {String} url    - 请求地址（相对路径）
+ * @param  {*}      data   - 请求参数
  * @param  {Object} config - Axios 配置
  * @return {Promise}
  */
-export default function axiosRequest (url, param, config) {
-  return axiosInstance.post(url, param, config)
-                      .then(processResponse)
-                      .catch(processError);
+export default function axiosRequest (url, data, config) {
+  config = Object.assign({ method: "post", url, data }, config);
+  return axiosInstance(config).then(processResponse).catch(processError);
 };
 
 /**
@@ -46,14 +45,6 @@ export default function axiosRequest (url, param, config) {
  * @param  {*} request - 提交参数
  */
 function transformRequest (request) {
-  // 登陆接口
-  if (typeof request === "string" && request.match(/^j_username=.+&j_password=.+$/)) {
-    return request;
-  }
-  // 图片上传接口
-  if (request instanceof FormData) {
-    return request;
-  }
   return {
     requestNo: Date.now(),
     param: request,
@@ -76,7 +67,7 @@ function processResponse (response) {
  * 处理 Axios 错误数据
  * @param  {Object} error - 错误对象
  */
-import { Toast, Alert } from "quasar-framework";
+import { Toast, Alert } from "quasar-framework-js";
 function processError (error) {
   const { status, data } = error.response;
   // 业务错误

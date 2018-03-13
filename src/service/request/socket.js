@@ -43,9 +43,11 @@ export default function socketRequest (url, param, handler, option) {
     },
   }, socketDefaults, option);
   if (option.adapter) {
-    return option.adapter(url, param, handler, option);
+    option.socket = option.adapter(url);
+  } else {
+    option.socket = new WebSocket(BASEURL_WS + url);
   }
-  let socket = option.socket = new WebSocket(BASEURL_WS + url);
+  let socket = option.socket;
   option.onopen && socket.addEventListener("open", option.onopen);
   option.onerror && socket.addEventListener("error", option.onerror);
   option.onclose && socket.addEventListener("close", option.onclose);

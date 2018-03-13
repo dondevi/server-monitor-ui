@@ -11,14 +11,15 @@
  * @update 2018-02-09 dondevi
  */
 
-const path = "/(path)/websocket/";
+const path = "/systemmonitor-server/websocket/";
 
 export default {
   axios: {
   },
   socket: {
-    getResourceState: path + "getResourceState",
-    getAlertList: path + "getAlertList",
-    getBusinessList: path + "getBusinessList",
+    getSystemInfo: path + "getSystemInfo",
+    getException: path + "getException",
+    getStatistics: path + "getStatistics",
+    getDatabaseInfo: path + "getDatabaseInfo",
   },
 };

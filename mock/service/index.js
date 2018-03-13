@@ -8,9 +8,9 @@
  *
  */
 
-import URLS from "service/urls/index.js";
-import REQUEST from "service/request/index.js";
-import ADAPTER from "mock/service/request/index.js";
+import URLS from "service/urls";
+import REQUEST from "service/request";
+import ADAPTER from "mock/service/request";
 
 /**
  * Init
