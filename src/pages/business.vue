@@ -8,7 +8,7 @@
 -->
 
 <template>
-  <q-list>
+  <q-list no-border class="bg-white">
     <q-list-header style="padding-right: 16px;"> 业务概览
       <span class="float-right">{{ current.checkTime | formatDate }}</span>
     </q-list-header>
@@ -125,18 +125,18 @@
     }),
     mounted () {
       this.socket = this.refreshData();
-      this.interval = window.setInterval(() => {
-        this.socket.send(true);
-      }, 30000);
+      // this.interval = window.setInterval(() => {
+      //   this.socket.send(true);
+      // }, 30000);
     },
     destroyed () {
       this.socket.close();
-      window.clearInterval(this.interval);
+      // window.clearInterval(this.interval);
     },
     methods: {
       refreshData () {
-        return SOCKET_getStatistics(true, json => {
-          this.current = json.data;
+        return SOCKET_getStatistics(null, json => {
+          this.current = json;
         });
       },
     },
@@ -146,5 +146,8 @@
 <style scoped>
   .q-item-side {
     min-width: 0;
+  }
+  .q-popover {
+    background: none;
   }
 </style>

@@ -41,6 +41,7 @@ cooking.set({
     "quasar-framework-css": "quasar-framework/dist/umd/quasar.mat.css",
     "src": path.resolve(__dirname, "src"),
     "mock": path.resolve(__dirname, "mock"),
+    "config": path.resolve(__dirname, "src/config"),
     "router": path.resolve(__dirname, "src/router"),
     "service": path.resolve(__dirname, "src/service"),
     "pages": path.resolve(__dirname, "src/pages"),
@@ -61,7 +62,7 @@ cooking.set({
     proxy: {
       "/(path)/websocket/**": {
         changeOrigin: true,
-        target: "ws://(domain)",
+        target: "ws://(host)",
         ws: true,
       },
     },

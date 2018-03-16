@@ -1,6 +1,9 @@
 /**
  * @author dondevi
  * @create 2018-03-08
+ *
+ * @update 2018-03-14 dondevi
+ *   1.Update: randomValue() - next()
  */
 
 /**
@@ -10,15 +13,18 @@
  * @param  {Number} maxValue  - Max limit
  * @param  {Number} minOffset - Min limit of random offet from current value
  * @param  {Number} maxOffset - Max limit of random offet from current value
- * @return {Number}           - Random value
+ * @return {Object}           - Random value & Next Function
  */
 export function randomValue (value, minValue, maxValue, minOffset, maxOffset) {
-  return function inner () {
+  const now = () => value;
+  const next = () => {
     value = value + randomInt(minOffset, maxOffset);
     value = Math.max(value, minValue);
     value = Math.min(value, maxValue);
-    return inner.value =  Math.round(value);
+    value = Math.round(value);
+    return value;
   };
+  return { now, next };
 }
 
 /**

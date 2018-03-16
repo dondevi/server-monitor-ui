@@ -8,7 +8,7 @@
 -->
 
 <template>
-  <q-list link separator>
+  <q-list no-border link dark class="bg-dark">
 
     <audio ref="audio-0" :src="audios.fatal"></audio>
     <audio ref="audio-1" :src="audios.error"></audio>
@@ -16,7 +16,7 @@
     <audio ref="audio-3" :src="audios.info"></audio>
 
     <q-list-header style="padding-right: 16px;"> 异常报警
-      <span class="float-right">
+      <span class="float-right" v-if="exceptionList.length">
         <q-chip color="red" small>{{ exceptionList.length }}</q-chip>
       </span>
     </q-list-header>
@@ -30,7 +30,7 @@
           {{ exception.sourceName }}
         </q-item-tile>
         <q-item-tile sublabel :color="['negative'][exception.level]">
-          <small>{{ exception.checkTime | formatDate }}</small>
+          <small>{{ exception.time | formatDate }}</small>
         </q-item-tile>
         <q-item-tile sublabel :color="['negative'][exception.level]" class="ellipsis" >
           {{ exception.message }}
@@ -47,7 +47,7 @@
           <q-toolbar-title>
             【{{ getLabel(exception.level) }}】
             {{ exception.sourceName }} {{ exception.sourceIP }}
-            <span class="float-right">{{ exception.checkTime | formatDate }}</span>
+            <span class="float-right">{{ exception.time | formatDate }}</span>
           </q-toolbar-title>
         </q-toolbar>
         <dl class="layout-padding">
@@ -115,8 +115,8 @@
       },
       refreshData () {
         return SOCKET_getException(null, json => {
-          this.exceptionList.push(json.data);
-          this.playSound(json.data.level);
+          this.exceptionList.unshift(json);
+          this.playSound(json.level);
         });
       },
     },
@@ -138,5 +138,8 @@
   }
   .q-item-side {
     min-width: 25px;
+  }
+  .q-popover {
+    background: none;
   }
 </style>

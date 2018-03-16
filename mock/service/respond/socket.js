@@ -59,5 +59,5 @@ export function getResponse (url, data, socket) {
     console.error(exception);
     socket.close(1011, exception);
   }
-  return JSON.stringify({ data: response });
+  return JSON.stringify(response);
 };

@@ -15,7 +15,7 @@
   <q-layout ref="layout" view="hHr LpR lFf">
 
     <!-- Header -->
-    <q-layout-header>
+    <q-layout-header v-once>
       <q-toolbar>
         <!-- <q-btn flat @click="$refs.layout.toggleLeft()">
           <q-icon name="menu" />
@@ -54,7 +54,7 @@
       <router-view/>
     </q-page-container>
 
-    <q-btn v-back-to-top round color="cyan-5"
+    <q-btn v-back-to-top round v-once color="cyan-5"
            class="fixed-bottom-right q-mr-md q-mb-md">
       <q-icon name="keyboard_arrow_up" />
     </q-btn>

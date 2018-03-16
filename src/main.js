@@ -11,14 +11,15 @@
  * Vue
  */
 import Vue from "vue";
+// Vue.config.errorHandler = (err, vm, info) => {};
 
 /**
  * Quasar Framework
  * @see http://quasar-framework.org/components/
  */
-import Quasar, * as All from "quasar-framework-js";
-import "quasar-framework-css";
 import "quasar-extras/material-icons";
+import "quasar-framework-css";
+import Quasar, * as All from "quasar-framework-js";
 Vue.use(Quasar, { directives: All, components: All });
 
 /**
@@ -41,6 +42,13 @@ Vue.filter("formatByte", formatByte);
  * Components
  */
 import ECharts from "components/echarts.vue";
+import "echarts/lib/component/tooltip";
+import "echarts/lib/component/grid";
+import "echarts/lib/component/dataset";
+import "echarts/lib/chart/line";
+// import echarts from "echarts";
+// import "echarts/lib/chart/pie";
+// import "echarts/lib/chart/sankey";
 Vue.component("chart", ECharts);
 
 /**
@@ -55,4 +63,3 @@ import router from "router/index.js";
 // import session from "router/session.js";
 import app from "frames/app.vue";
 new Vue({ router, render: h => h(app) }).$mount("#app");
-

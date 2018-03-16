@@ -22,9 +22,9 @@ const totalDiskSize = 41153856;
 
 // Computed value
 const server = randomValue(0, 0, 2, -1, 1);
-const cpuRatio = randomValue(randomInt(10, 80), 10, 80, -10, 10);
-const jvmUsingMemory = randomValue(548864, 102400, jvmMaxMemory - 512000, -102400, 102400);
-const usedPhysicalMemorySize = randomValue(12108668, 102400, totalPhysicalMemorySize - 512000, -512000, 512000);
+const cpuRatio = randomValue(randomInt(10, 80), 5, 90, -20, 20);
+const jvmUsingMemory = randomValue(548864, 102400, jvmMaxMemory - 512000, -51200, 51200);
+const usedPhysicalMemorySize = randomValue(12108668, 102400, totalPhysicalMemorySize - 512000, -102400, 102400);
 const usedDiskSize = randomValue(31323264, 102400, totalDiskSize - 512000, -256000, 256000);
 const totalThread = randomValue(118, 20, Infinity, -20, 20);
 const innerServerPing = randomValue(100, 20, Infinity, -20, 20);
@@ -39,40 +39,40 @@ export const getSystemInfo = (param, socket) => {
     // 检查时间
     "checkTime": Date.now(),
     // 服务器名称
-    "serverName": servers[server()].name,
+    "serverName": servers[server.next()].name,
     // 服务器IP
-    "serverIP": servers[server.value].ip,
+    "serverIP": servers[server.now()].ip,
     // jvm最大可使用内存(kb)
     "jvmMaxMemory": jvmMaxMemory,
     // jvm目前占用的内存(kb)
-    "jvmUsingMemory": jvmUsingMemory(),
+    "jvmUsingMemory": jvmUsingMemory.next(),
     // jvm剩余可使用内存(kb)
-    "jvmFreeMemory": jvmMaxMemory - jvmUsingMemory.value,
+    "jvmFreeMemory": jvmMaxMemory - jvmUsingMemory.now(),
     // cpu使用率
-    "cpuRatio": cpuRatio(),
+    "cpuRatio": cpuRatio.next(),
     // 总物理内存(kb)
     "totalPhysicalMemorySize": totalPhysicalMemorySize,
     // 已使用的物理内存(kb)
-    "usedPhysicalMemorySize": usedPhysicalMemorySize(),
+    "usedPhysicalMemorySize": usedPhysicalMemorySize.next(),
     // 剩余物理内存(kb)
-    "freePhysicalMemorySize": totalPhysicalMemorySize - usedPhysicalMemorySize.value,
+    "freePhysicalMemorySize": totalPhysicalMemorySize - usedPhysicalMemorySize.now(),
     // 总物理磁盘(kb)
     "totalDiskSize": totalDiskSize,
     // 已使用的物理磁盘(kb)
-    "usedDiskSize": usedDiskSize(),
+    "usedDiskSize": usedDiskSize.next(),
     // 剩余物理磁盘(kb)
-    "freeDiskSize": totalDiskSize - usedDiskSize.value,
+    "freeDiskSize": totalDiskSize - usedDiskSize.now(),
     // 线程总数
-    "totalThread": totalThread(),
+    "totalThread": totalThread.next(),
     // 内部服务ping值
-    "innerServerPing": innerServerPing(),
+    "innerServerPing": innerServerPing.next(),
     // 远程服务ping值
-    "remoteServerPing": remoteServerPing(),
+    "remoteServerPing": remoteServerPing.next(),
     // 网络连接数
-    "netEstablished": netEstablished(),
+    "netEstablished": netEstablished.next(),
     // 网络连接关闭数
-    "netCloseWait": netCloseWait(),
+    "netCloseWait": netCloseWait.next(),
     // 网络连接等待数
-    "netTimeWait": netTimeWait(),
+    "netTimeWait": netTimeWait.next(),
   };
 };

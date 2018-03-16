@@ -17,18 +17,10 @@
 
 <template>
   <q-page class="row" padding>
-    <div class="col-md-3 q-pa-sm">
-      <com-system class="bg-white"/>
-    </div>
-    <div class="col-md-3 q-pa-sm">
-      <com-business class="bg-white"/>
-    </div>
-    <div class="col-md-3 q-pa-sm">
-      <com-database class="bg-white"/>
-    </div>
-    <div class="col-md-3 q-pa-sm">
-      <com-exception class="bg-white"/>
-    </div>
+    <div class="col-md-3 q-pa-sm"> <com-business/> </div>
+    <div class="col-md-3 q-pa-sm"> <com-system/> </div>
+    <div class="col-md-3 q-pa-sm"> <com-database/> </div>
+    <div class="col-md-3 q-pa-sm"> <com-exception/> </div>
   </q-page>
 </template>
 

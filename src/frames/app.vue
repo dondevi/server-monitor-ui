@@ -12,3 +12,10 @@
 <template>
   <router-view></router-view>
 </template>
+
+<style>
+  .material-icons {
+    width: 1em;
+    overflow: hidden;
+  }
+</style>

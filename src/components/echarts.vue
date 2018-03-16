@@ -9,22 +9,8 @@
   <div class="echarts"></div>
 </template>
 
-<style>
-  .echarts {
-    display: block;
-    height: 400px;
-  }
-</style>
-
 <script>
-  // import echarts from "echarts";
   import echarts from "echarts/lib/echarts";
-  import "echarts/lib/component/tooltip";
-  import "echarts/lib/component/grid";
-  import "echarts/lib/component/dataset";
-  import "echarts/lib/chart/line";
-  // import "echarts/lib/chart/pie";
-  // import "echarts/lib/chart/sankey";
 
   export default {
     props: {
@@ -58,3 +44,10 @@
     },
   };
 </script>
+
+<style>
+  .echarts {
+    display: block;
+    height: 400px;
+  }
+</style>
