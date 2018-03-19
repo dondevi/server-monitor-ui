@@ -21,6 +21,6 @@
     "quasar-extras": "~1.0.2"
   },
   "devDependencies": {
-    "cooking-cli": "^1.5.5",
+    "cooking-cli": "^1.5.5"
   }
 }
