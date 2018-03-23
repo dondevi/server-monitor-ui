@@ -1,5 +1,9 @@
 <!--
 /**
+ * =============================================================================
+ *  Echarts
+ * =============================================================================
+ *
  * @author dondevi
  * @create 2018-03-09
  */
@@ -11,7 +15,12 @@
 
 <script>
   import echarts from "echarts/lib/echarts";
-
+  import "echarts/lib/component/tooltip";
+  import "echarts/lib/component/grid";
+  import "echarts/lib/component/dataset";
+  import "echarts/lib/chart/line";
+  // import "echarts/lib/chart/pie";
+  // import "echarts/lib/chart/sankey";
   export default {
     props: {
       option: Object,
@@ -37,9 +46,6 @@
       },
       resize () {
         this.chart && this.chart.resize(...arguments);
-      },
-      onResize (size) {
-        console.log(size)
       },
     },
   };

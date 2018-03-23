@@ -2,7 +2,7 @@
  * @author dondevi
  * @create 2018-02-05
  *
- * @update 2108-03-08 dondevi
+ * @update 2018-03-08 dondevi
  *   1.Update: data structure
  *   2.Update: randomValue() to curry function
  */

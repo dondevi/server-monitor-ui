@@ -25,9 +25,9 @@ mockAllService();
 export function mockAllService () {
   const isMock = /mock/.test(window.location.search);
   if (!isMock) { return; }
-  let { axiosDefaults } = require("service/request/axios.js");
+  // let { axiosDefaults } = require("service/request/axios.js");
   let { socketDefaults } = require("service/request/socket.js");
-  axiosDefaults.adapter = ADAPTER.axios;
+  // axiosDefaults.adapter = ADAPTER.axios;
   socketDefaults.adapter = ADAPTER.socket;
 }
 
@@ -36,12 +36,12 @@ export function mockAllService () {
  * 提供局部 Mock 接口
  * @useage import { ... } form "mock/service";
  */
-for (let key in URLS.axios) {
-  module.exports[key] = (param, config = {}) => {
-    config.adapter = ADAPTER.axios;
-    return REQUEST.axios(URLS.axios[key], param, config);
-  };
-}
+// for (let key in URLS.axios) {
+//   module.exports[key] = (param, config = {}) => {
+//     config.adapter = ADAPTER.axios;
+//     return REQUEST.axios(URLS.axios[key], param, config);
+//   };
+// }
 
 for (let key in URLS.socket) {
   module.exports[key] = (param, handler, config = {}) => {

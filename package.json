@@ -1,21 +1,24 @@
 {
-  "name": "xf-server-monitor",
+  "name": "server-monitor",
   "author": "dondevi",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "private": true,
   "repository": {
-    "type": "svn",
-    "url": "http://svnm.xf.com/svn/server-monitor-h5/"
+    "type": "git",
+    "url": "https://github.com/dondevi/server-monitor-ui/"
   },
   "scripts": {
-    "init": "npm link vue & npm link vue-router & npm link axios & npm link quasar-framework & npm link quasar-extras",
+    "init": "npm link vue & npm link vue-router & npm link quasar-framework@0.15.6 & npm link quasar-extras",
     "dev": "cooking watch -p",
     "dist": "cooking build -p"
+  },
+  "engines": {
+    "node": ">= 8.9.0",
+    "npm": ">= 5.6.0"
   },
   "dependencies": {
     "vue": "^2.5",
     "vue-router": "^3.0",
-    "axios": "~0.17.1",
     "echarts": "^4.0.4",
     "quasar-framework": "0.15.6",
     "quasar-extras": "~1.0.2"

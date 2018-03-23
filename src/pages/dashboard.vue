@@ -16,7 +16,7 @@
 -->
 
 <template>
-  <q-page class="row" padding>
+  <q-page class="row layout-padding">
     <div class="col-md-3 q-pa-sm"> <com-business/> </div>
     <div class="col-md-3 q-pa-sm"> <com-system/> </div>
     <div class="col-md-3 q-pa-sm"> <com-database/> </div>

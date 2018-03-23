@@ -29,7 +29,7 @@
       <q-item-main>
         <q-item-tile label> 数据库流量 </q-item-tile>
         <q-item-tile sublabel> 总流速
-          <span class="float-right">{{ current.bytes_traffic }}</span>
+          <span class="float-right">{{ current.bytes_traffic | formatByte }}</span>
         </q-item-tile>
         <q-item-tile sublabel> 接收速率
           <span class="float-right">{{ current.bytes_received | formatByte }}</span>
@@ -52,7 +52,7 @@
         <q-item-ratio label="使用率" is-tile
           :encode="{ x: 'checkTime', y: 'key_used_ratio' }"
           :history="history" :ratio="current.key_used_ratio"
-          :total="current.key_used + current.key_free"
+          :total="+current.key_used + +current.key_free"
           :used="current.key_used"
           :free="current.key_free"/>
         <q-item-tile sublabel> 平均命中率

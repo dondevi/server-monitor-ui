@@ -17,10 +17,8 @@ import Vue from "vue";
  * Quasar Framework
  * @see http://quasar-framework.org/components/
  */
-import "quasar-extras/material-icons";
-import "quasar-framework-css";
-import Quasar, * as All from "quasar-framework-js";
-Vue.use(Quasar, { directives: All, components: All });
+import { Quasar, QuasarDirectives, QuasarComponents } from "quasar-framework-custom";
+Vue.use(Quasar, { directives: QuasarDirectives, components: QuasarComponents });
 
 /**
  * Echarts
@@ -42,19 +40,7 @@ Vue.filter("formatByte", formatByte);
  * Components
  */
 import ECharts from "components/echarts.vue";
-import "echarts/lib/component/tooltip";
-import "echarts/lib/component/grid";
-import "echarts/lib/component/dataset";
-import "echarts/lib/chart/line";
-// import echarts from "echarts";
-// import "echarts/lib/chart/pie";
-// import "echarts/lib/chart/sankey";
 Vue.component("chart", ECharts);
-
-/**
- * Mock
- */
-import "mock";
 
 /**
  * Router & APP

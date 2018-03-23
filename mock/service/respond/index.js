@@ -6,7 +6,7 @@
 import URLS from "service/urls";
 import DATAS from "mock/service/datas";
 
-export const axios = mapResponses(URLS.axios, DATAS.axios);
+// export const axios = mapResponses(URLS.axios, DATAS.axios);
 export const socket = mapResponses(URLS.socket, DATAS.socket);
 
 /**

@@ -48,9 +48,14 @@ export default function socketRequest (url, param, handler, option) {
     option.socket = new WebSocket(BASEURL_WS + url);
   }
   let socket = option.socket;
+  // Keep alive
+  const timer = window.setInterval(() => socket.send(""), 30000);
   option.onopen && socket.addEventListener("open", option.onopen);
-  option.onerror && socket.addEventListener("error", option.onerror);
-  option.onclose && socket.addEventListener("close", option.onclose);
   option.onmessage && socket.addEventListener("message", option.onmessage);
+  option.onerror && socket.addEventListener("error", option.onerror);
+  option.onclose && socket.addEventListener("close", event => {
+    window.clearInterval(timer);
+    option.onclose(event);
+  });
   return socket;
 }

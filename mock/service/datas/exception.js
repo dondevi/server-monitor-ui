@@ -25,7 +25,7 @@ const client = randomValue(0, 0, 2, -1, 1);
 const level = randomValue(2, 0, 3, -1, 1);
 
 export const getException = (param, socket) => {
-  socket._delay = 600000;
+  socket._delay = 3600000;
   return {
     // 检查时间
     "time": Date.now(),

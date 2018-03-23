@@ -14,7 +14,7 @@
       </q-item-tile>
       <q-item-tile sublabel>
         <q-progress class="round-borders inset-shadow" style="height:10px"
-          :percentage="ratio" :color="color" />
+          :percentage="+ratio" :color="color" />
       </q-item-tile>
       <q-item-tile sublabel v-if="total">
         {{ total | formatByte }} -
@@ -50,17 +50,17 @@
       "label": String,
       "icon": String,
       "encode": Object,
-      "ratio": Number,
-      "total": Number,
-      "used": Number,
-      "free": Number,
+      "ratio": [Number, String],
+      "total": [Number, String],
+      "used": [Number, String],
+      "free": [Number, String],
       "history": Array,
       "is-tile": Boolean,
     },
     data () {
       return {
         pieces: [
-          { value: 0, color: "blue-3" },
+          { min: -Infinity, max: 0, color: "blue-3" },
           { min: 0, max: 70, color: "green-5" },
           { min: 70, max: 90, color: "orange-5" },
           { min: 90, max: 100, color: "red-5" },
