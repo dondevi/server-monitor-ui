@@ -7,9 +7,10 @@
  * @create 2018-03-08
  */
 
-export default function formatDate (value = 0, format = "YYYY-MM-DD hh:mm:ss") {
-  const date = new Date(value);
+export default function formatDate (value, format = "YYYY-MM-DD hh:mm:ss") {
+  if (!value) { return ""; }
 
+  const date = new Date(value);
   const values = {
     "(Y+)": date.getFullYear(),                     // Year
     "(M+)": date.getMonth() + 1,                    // Month

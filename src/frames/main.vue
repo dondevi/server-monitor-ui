@@ -67,6 +67,6 @@
     background: linear-gradient(#656671, #464653);
   }
   .q-toolbar {
-    background-color: #3e3d44;
+    background-color: #3e3d44 !important;
   }
 </style>

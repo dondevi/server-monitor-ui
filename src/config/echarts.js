@@ -5,6 +5,9 @@
  *
  * @author dondevi
  * @create 2018-03-16
+ *
+ * @todo 2018-03-29 dondevi
+ *   1.Tooltip formatter show seconds and labels
  */
 
 /**
@@ -28,7 +31,7 @@ export function getLineChartOption (option) {
   };
   const chartOption = {
     tooltip: tooltipOption,
-    grid:  { left: 0, top: 0, right: 0, bottom: 0 },
+    grid:  { top: 5, right: 0, bottom: 0, left: 0 },
     xAxis: { type: "time", show: false },
     yAxis: { type: "value", show: false },
   };

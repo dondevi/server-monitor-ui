@@ -12,10 +12,20 @@
 import URLS from "service/urls/index.js";
 import REQUEST from "service/request/index.js";
 
-// for (let key in URLS.axios) {
-//   module.exports[key] = REQUEST.axios.bind(undefined, URLS.axios[key]);
-// }
+export default factoryService();
 
-for (let key in URLS.socket) {
-  module.exports[key] = REQUEST.socket.bind(undefined, URLS.socket[key]);
+/**
+ * 生成 service
+ * @return {Object}
+ */
+function factoryService () {
+  const service = {};
+  for (let type in URLS) {
+    service[type] = service[type] || {};
+    for (let key in URLS[type]) {
+      service[type][key] = REQUEST[type].bind(undefined, URLS[type][key]);
+    }
+  }
+  return service;
 }
+

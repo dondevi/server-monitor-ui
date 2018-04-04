@@ -1,12 +1,13 @@
 {
   "name": "server-monitor",
   "author": "dondevi",
-  "version": "0.7.0",
+  "version": "0.7.5",
   "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/dondevi/server-monitor-ui/"
   },
+  "demo": "https://dondevi.github.io/server-monitor-ui/dist/index.html?mock",
   "scripts": {
     "init": "npm link vue & npm link vue-router & npm link quasar-framework@0.15.6 & npm link quasar-extras",
     "dev": "cooking watch -p",

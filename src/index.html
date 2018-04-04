@@ -1,13 +1,27 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-  <title>Server Monitor</title>
-  <link rel="shortcut icon" href="~assets/favicon.png">
-</head>
-<body>
-  <div id="app"></div>
-</body>
+  <head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui"/>
+    <title> Server Monitor </title>
+    <link rel="shortcut icon" href="~assets/favicon.png"/>
+    <style>
+      html, body {
+        min-height: 100%;
+        background: linear-gradient(#656671, #464653) !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app" style="position:absolute;top:50%;left:50%;margin:-18px;">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="36" height="36" viewBox="0 0 135 145" color="#4dd0e1">
+        <rect x="0" y="57.5" width="15" height="30" rx="6"></rect>
+        <rect x="30" y="27.5" width="15" height="90" rx="6"></rect>
+        <rect x="60" y="0" width="15" height="145" rx="6"></rect>
+        <rect x="90" y="27.5" width="15" height="90" rx="6"></rect>
+        <rect x="120" y="57.5" width="15" height="30" rx="6"></rect>
+      </svg>
+    </div>
+  </body>
 </html>

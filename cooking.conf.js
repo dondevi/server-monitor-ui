@@ -4,10 +4,14 @@
  * =============================================================================
  *
  * @see http://cookingjs.github.io/zh-cn/configuration.html
+ * @see https://webpack.js.org/configuration/
  * @permission Engineer
  *
  * @author dondevi
  * @create 2018-02-02
+ *
+ * @todo 2018-03-29 dondevi
+ *   1.Split stylus code
  *
  * @update 2018-03-13 dondevi
  * @update 2018-03-21 dondevi
@@ -16,6 +20,8 @@
  *   1.Update: Chunk config !
  * @update 2018-03-23 dondevi
  *   1.Add: build/quasar.js !
+ * @update 2018-04-02 dondevi
+ *   1.Add: devServer.compress: true
  */
 
 const fs   = require("fs");
@@ -57,7 +63,7 @@ let cookingConfig = {
   clean: true,
   postcss: [],
   /**
-   * For stylus, you need to add blow to {user_home}/.cooking/package.json:
+   * For stylus, you need to add below to {user_home}/.cooking/package.json:
    *   devDependencies: {
    *     "stylus": "^0.54.5",
    *     "stylus-loader": "^3.0.1",
@@ -90,11 +96,13 @@ let cookingConfig = {
     publicPath: "/",
     contentBase: "dist",
     clean: false,
+    compress: true,
     extractCSS: false,
     proxy: {
-      "/(path)/websocket/**": {
+      "/monitorcenter-as-server/monitor/websocket/**": {
         changeOrigin: true,
-        target: "ws://(host)",
+        target: "ws://192.168.0.157:8900",  // Development
+        // target: "ws://crj.xfbm100.com",  // Production
         ws: true,
       },
     },

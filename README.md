@@ -1,7 +1,5 @@
 <!--
 /**
- * Server Monitor
- *
  * @author dondevi
  * @update 2018-02-02
  */
@@ -16,20 +14,20 @@
 
 
 ## Initialization
-> Npm link Dependencies: `vue`, `vue-router`, `axios`, `echarts`, `quasar`
+> Npm link Dependencies: `vue`, `vue-router`, `quasar`, `echarts`
 
 ```shell
   npm run init
 ```
 
-## Local Development
+## Development
 > Run Local Server: http://localhost:8101
 
 ```shell
   npm run dev
 ```
 
-## Make Production
+## Production
 > Build `src` to `dist`
 
 ```

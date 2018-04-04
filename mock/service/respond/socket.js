@@ -58,6 +58,7 @@ export function getResponse (url, data, socket) {
     }
     console.error(exception);
     socket.close(1011, exception);
+    exception = null;
   }
   return JSON.stringify(response);
 };

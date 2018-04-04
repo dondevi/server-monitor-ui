@@ -18,4 +18,7 @@
     width: 1em;
     overflow: hidden;
   }
+  /*.q-popover {
+    animation: none;
+  }*/
 </style>

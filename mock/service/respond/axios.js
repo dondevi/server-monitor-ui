@@ -35,6 +35,7 @@ export function getResponse (url, request) {
     }
     console.error(exception);
     data = { error: true, exception };
+    exception = null;
   }
   data.requestNo = request.requestNo;
   return { status, data };

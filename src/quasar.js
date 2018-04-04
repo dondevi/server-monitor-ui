@@ -1,5 +1,5 @@
 // Generated automatically by build/quasar.js
-// Fri Mar 23 2018 19:03:02 GMT+0800 (中国标准时间)
+// Wed Apr 04 2018 17:52:44 GMT+0800 (中国标准时间)
 // Don't Edit please!
   
 // import "quasar-extras/roboto-font";

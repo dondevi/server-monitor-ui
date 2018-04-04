@@ -39,24 +39,30 @@ function MockSocket (url) {
   window.setTimeout(() => openSocket(this));
 }
 
-MockSocket.prototype.CONNECTING = MockSocket.CONNECTING = 0;
-MockSocket.prototype.OPEN = MockSocket.OPEN = 1;
-MockSocket.prototype.CLOSING = MockSocket.CLOSING = 2;
-MockSocket.prototype.CLOSED = MockSocket.CLOSED = 3;
+/**
+ * @see https://medium.com/@tverwaes/setting-up-prototypes-in-v8-ec9c9491dfe2
+ */
+const mockSocketProto = MockSocket.prototype;
+mockSocketProto.CONNECTING = MockSocket.CONNECTING = 0;
+mockSocketProto.OPEN = MockSocket.OPEN = 1;
+mockSocketProto.CLOSING = MockSocket.CLOSING = 2;
+mockSocketProto.CLOSED = MockSocket.CLOSED = 3;
 
-MockSocket.prototype._trigger = function (type, props) {
+mockSocketProto._trigger = function (type, props) {
   let event = new Event(type);
   Object.assign(event, props);
   this[`on${type}`] && this[`on${type}`](props);
   this.dispatchEvent(event);
 }
 
-MockSocket.prototype.send = function (data) {
-  let response = getResponse(this.url, data, this);
-  this._trigger("message", { data: response });
+mockSocketProto.send = function (data) {
+  if (data) {
+    let response = getResponse(this.url, data, this);
+    this._trigger("message", { data: response });
+  }
 };
 
-MockSocket.prototype.close = function (code, reason) {
+mockSocketProto.close = function (code, reason) {
   this.readyState = this.CLOSED;
   this._trigger("close", { code, reason });
   window.clearTimeout(this._timer);

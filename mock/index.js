@@ -8,5 +8,8 @@
  *
  */
 
-import "mock/service/index.js";
+import { injectMockService } from "mock/service/index.js";
 
+if (/mock/.test(window.location.search)) {
+  injectMockService();
+}

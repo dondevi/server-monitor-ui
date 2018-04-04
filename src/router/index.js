@@ -16,8 +16,10 @@ import VueRouter from "vue-router";
 Vue.use(VueRouter);
 
 
-const main = () => import("frames/main");
-const dashboard = () => import("pages/dashboard");
+import main from "frames/main";
+
+// const dashboard = () => import("pages/dashboard");
+import dashboard from "pages/dashboard";
 
 
 const routes = [

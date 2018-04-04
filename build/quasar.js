@@ -3,7 +3,7 @@
  *  Quasar Statment
  * =============================================================================
  *
- * @for quasar-framework@0.15.6
+ * @for quasar-framework@0.15.6~0.15.10
  *
  * @author dondevi
  * @create 2018-03-23

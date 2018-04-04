@@ -1,37 +1,50 @@
 <!--
 /**
+ * =============================================================================
+ *  Exception Info
+ * =============================================================================
+ *
  * @author dondevi
  * @create 2018-02-05
  *
  * @update 2018-03-09 dondevi
+ * @update 2018-03-30 dondevi
+ *   1.Update: Audios - lazy load, mutable
  */
 -->
 
 <template>
-  <q-list no-border link dark class="bg-dark">
+  <q-list dark no-border class="bg-dark">
 
-    <audio ref="audio-0" :src="audios.fatal"></audio>
-    <audio ref="audio-1" :src="audios.error"></audio>
-    <audio ref="audio-2" :src="audios.warn"></audio>
-    <audio ref="audio-3" :src="audios.info"></audio>
-
-    <q-list-header style="padding-right: 16px;"> 异常报警
-      <span class="float-right" v-if="exceptionList.length">
-        <q-chip color="red" small>{{ exceptionList.length }}</q-chip>
-      </span>
+    <q-list-header> 异常信息
+      <q-chip color="red" pointing="left" v-if="exceptions.length">
+        {{ exceptions.length }}
+      </q-chip>
+      <q-btn class="float-right on-left" round @click.native="toggleAudio">
+        <q-icon :name="audio.muted ? 'volume_off' : 'volume_up'"/>
+      </q-btn>
     </q-list-header>
 
-    <q-item v-for="(exception, index) in exceptionList" :key="index"
-            @click.native="openModal(exception)">
+    <q-item>
+      <q-item-main>
+        <chart ref="chart" :option="option" theme="light" auto-resize/>
+      </q-item-main>
+    </q-item>
+
+    <q-item-separator/>
+
+    <q-item v-for="(exception, index) in exceptions" :key="index"
+            @click.native="openModal(exception)" link>
       <q-item-side :icon="getIcon(exception.level)"
                    :color="getColor(exception.level)"/>
       <q-item-main>
         <q-item-tile label :color="['negative'][exception.level]" class="ellipsis">
           {{ exception.sourceName }}
+          <time class="float-right">{{ exception.checkTime | formatDate }}</time>
         </q-item-tile>
-        <q-item-tile sublabel :color="['negative'][exception.level]">
-          <small>{{ exception.time | formatDate }}</small>
-        </q-item-tile>
+        <!-- <q-item-tile sublabel :color="['negative'][exception.level]">
+          <time>{{ exception.checkTime | formatDate }}</time>
+        </q-item-tile> -->
         <q-item-tile sublabel :color="['negative'][exception.level]" class="ellipsis" >
           {{ exception.message }}
         </q-item-tile>
@@ -47,7 +60,7 @@
           <q-toolbar-title>
             【{{ getLabel(exception.level) }}】
             {{ exception.sourceName }} {{ exception.sourceIP }}
-            <span class="float-right">{{ exception.time | formatDate }}</span>
+            <span class="float-right">{{ exception.checkTime | formatDate }}</span>
           </q-toolbar-title>
         </q-toolbar>
         <dl class="layout-padding">
@@ -61,8 +74,6 @@
           <dd><label>客户端IP：</label>{{ exception.clientIP }}</dd>
           <dd><label>客户端版本号：</label>{{ exception.clientVersion }}</dd>
           <br>
-          <!-- <dt class="bg-light">参数</dt> -->
-          <!-- <dd><pre>{{ exception.args }}</pre></dd> -->
           <template v-if="exception.stackTrace">
             <dt class="bg-light">异常堆栈</dt>
             <dd><pre>{{ exception.stackTrace }}</pre></dd>
@@ -75,17 +86,41 @@
 </template>
 
 <script>
-  import { getException as SOCKET_getException } from "service";
+  import service from "service";
   export default {
     data: () => ({
-      audios: {
-        fatal: require("assets/fatal.mp3"),
-        error: require("assets/error.mp3"),
-        warn: require("assets/warn.mp3"),
-        info: require("assets/alert.mp3"),
+      audio: {
+        muted: false,
+        list: {
+          0: { src: require("assets/fatal.mp3"), dom: null },  // Fatal
+          1: { src: require("assets/error.mp3"), dom: null },  // Error
+          2: { src: require("assets/warn.mp3"), dom: null },   // Warn
+          3: { src: require("assets/alert.mp3"), dom: null },  // Info
+        },
+      },
+
+      option: {
+        tooltip: { trigger: "axis", axisPointer: { type : "shadow" } },
+        grid: { top: 5, right: 0, bottom: 0, left: 0, containLabel: true },
+        xAxis: { type: "category",
+          data: ["FATAL", "ERROR", "WARN", "INFO"],
+          axisTick: { alignWithLabel: true },
+          nameTextStyle: { color: "rgba(255,255,255,0.4)" },
+          axisLine: { lineStyle: { color: "rgba(255,255,255,0.4)" } },
+        },
+        yAxis: { type: "value", splitLine: { show: false },
+          nameTextStyle: { color: "rgba(255,255,255,0.4)" },
+          axisLine: { lineStyle: { color: "rgba(255,255,255,0.4)" } },
+        },
+        series: { type:"bar", data: [
+          { value: 0, itemStyle: { color: "rgba(219,40,40,0.7)" } },
+          { value: 0, itemStyle: { color: "rgba(244,67,54,0.7)" } },
+          { value: 0, itemStyle: { color: "rgba(242,192,55,0.7)" } },
+          { value: 0, itemStyle: { color: "rgba(49,204,236,0.7)" } },
+        ] },
       },
       exception: null,
-      exceptionList: [],
+      exceptions: [],
     }),
     mounted () {
       this.socket = this.refreshData();
@@ -94,17 +129,27 @@
       this.socket.close();
     },
     methods: {
-      getLabel (level) {
-        return ["FATAL", "ERROR", "WARN", "INFO"][level];
-      },
-      getIcon (level) {
-        return ["cancel", "error", "warning", "info"][level];
-      },
-      getColor (level) {
-        return ["negative", "red", "warning", "info"][level];
+      getLabel: (level) => ["FATAL", "ERROR", "WARN", "INFO"][level],
+      getIcon: (level) => ["cancel", "error", "warning", "info"][level],
+      getColor: (level) => ["negative", "red", "warning", "info"][level],
+      toggleAudio () {
+        const muted = !this.audio.muted;
+        this.audio.muted = muted;
+        Object.values(this.audio.list).forEach(audio => {
+          if (audio.dom && !audio.dom.paused) {
+            audio.dom.muted = muted;
+          }
+        });
       },
       playSound (level) {
-        this.$refs[`audio-${level}`].play();
+        const audio = this.audio.list[level];
+        if (audio.dom) {
+          audio.dom.muted = this.audio.muted;
+          audio.dom.play();
+        } else {
+          audio.dom = new Audio(audio.src);
+          audio.dom.oncanplay = event => this.playSound(level);
+        }
       },
       openModal (exception) {
         this.exception = exception;
@@ -114,9 +159,14 @@
         this.$refs["modal-detail"].hide();
       },
       refreshData () {
-        return SOCKET_getException(null, json => {
-          this.exceptionList.unshift(json);
-          this.playSound(json.level);
+        return service.socket.getException(null, json => {
+          const { level } = json;
+          this.exceptions.unshift(json);
+          this.playSound(level);
+          this.option.series.data[level].value += 1;
+          this.$refs.chart.setOption({
+            series: { data: this.option.series.data }
+          });
         });
       },
     },
@@ -136,10 +186,7 @@
     white-space: pre-wrap;
     word-wrap: break-word;
   }
-  .q-item-side {
-    min-width: 25px;
-  }
-  .q-popover {
-    background: none;
+  .q-chip {
+    z-index: 1;
   }
 </style>

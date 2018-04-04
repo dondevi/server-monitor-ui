@@ -4,10 +4,14 @@
  */
 
 export const getStatistics = (param, socket) => {
-  socket._delay = false;
+  socket._delay = 60000;
   return {
     // 检查时间
     "checkTime": Date.now(),
+    // 开始时间
+    "startTime": Date.now() - 60000,
+    // 结束时间
+    "endTime": Date.now(),
     // 当前递交量
     "currentSubmit": 10,
     // 当前合格量

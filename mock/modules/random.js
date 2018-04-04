@@ -1,6 +1,13 @@
 /**
+ * =============================================================================
+ *  Genarate Random value series for chart
+ * =============================================================================
+ *
  * @author dondevi
  * @create 2018-03-08
+ *
+ * @todo 2018-03-30 dondevi
+ *   1.Fix: Memory leak
  *
  * @update 2018-03-14 dondevi
  *   1.Update: randomValue() - next()

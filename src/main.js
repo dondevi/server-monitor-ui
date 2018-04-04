@@ -11,7 +11,10 @@
  * Vue
  */
 import Vue from "vue";
+// Vue.config.silent = true;
+// Vue.config.performance = true;
 // Vue.config.errorHandler = (err, vm, info) => {};
+// Vue.config.warnHandler = (err, vm, info) => {};
 
 /**
  * Quasar Framework

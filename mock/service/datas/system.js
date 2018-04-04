@@ -10,9 +10,9 @@
 import { randomValue, randomInt } from "mock/modules/random.js";
 
 const servers = [
-  { name: "Server-1", ip: "192.168.112.101" },
-  { name: "Server-2", ip: "192.168.112.102" },
-  { name: "Server-3", ip: "192.168.112.103" },
+  { name: "Server-1", ip: "192.168.112.101", id: "1" },
+  { name: "Server-2", ip: "192.168.112.102", id: "2" },
+  { name: "Server-3", ip: "192.168.112.103", id: "3" },
 ];
 
 // Fixed value
@@ -39,9 +39,11 @@ export const getSystemInfo = (param, socket) => {
     // 检查时间
     "checkTime": Date.now(),
     // 服务器名称
-    "serverName": servers[server.next()].name,
-    // 服务器IP
-    "serverIP": servers[server.now()].ip,
+    "sourceName": servers[server.next()].name,
+    // 服务器 IP
+    "sourceIP": servers[server.now()].ip,
+    // 服务器 ID
+    "sourceID": servers[server.now()].id,
     // jvm最大可使用内存(kb)
     "jvmMaxMemory": jvmMaxMemory,
     // jvm目前占用的内存(kb)
