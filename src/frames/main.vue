@@ -23,7 +23,7 @@
         <q-icon name="graphic_eq" color="cyan-4" />
         <q-toolbar-title>
           Server Monitor
-          <span slot="subtitle">幸福网络运维监控</span>
+          <span slot="subtitle">运维监控</span>
         </q-toolbar-title>
         <!-- <q-btn flat>
           <q-icon name="notifications_none" />
